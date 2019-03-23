@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table
@@ -20,8 +21,8 @@ public class Player {
     private String password;
     @Column(unique = true)
     private String userName;
-    private Timestamp registrationDate;
-    private Timestamp lastLogIn;
+    private String registrationDate;
+    private String lastLogIn;
 
 
     private String salt;
@@ -32,10 +33,10 @@ public class Player {
         this.salt = generateSalt();
         this.password = generateHash(password, salt);
         this.userName = name;
-        this.registrationDate = new Timestamp(System.currentTimeMillis());
-        this.lastLogIn = new Timestamp(System.currentTimeMillis());
+        Date date = new Date();
+        this.registrationDate = new Timestamp(date.getTime()).toString();
+        this.lastLogIn = new Timestamp(date.getTime()).toString();
     }
-
 
     public Player() {}
 
@@ -73,7 +74,7 @@ public class Player {
         this.userName = userName;
     }
 
-    public String generateHash(String passwordToHash, String   salt){
+    public String generateHash(String passwordToHash, String salt){
         String generatedPassword = null;
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");

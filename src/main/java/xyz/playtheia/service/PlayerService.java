@@ -51,12 +51,12 @@ public class PlayerService {
         add(player);
     }
 
-    public boolean checkForExistingEmail(Player player){
-        return this.playerRepository.findPlayerByEmail(player.getEmail()) != null;
+    public boolean checkForExistingEmail(String email){
+        return this.playerRepository.findPlayerByEmail(email) != null;
     }
 
-    public boolean checkForExistingName(Player player){
-        return this.playerRepository.findPlayerByUserName(player.getUserName()) != null;
+    public boolean checkForExistingUserName(String userName){
+        return this.playerRepository.findPlayerByUserName(userName) != null;
     }
 
 

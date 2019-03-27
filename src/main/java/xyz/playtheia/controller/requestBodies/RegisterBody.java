@@ -2,9 +2,9 @@ package xyz.playtheia.controller.requestBodies;
 
 public class RegisterBody {
 
-    String email;
-    String password;
-    String userName;
+    private String email;
+    private String password;
+    private String userName;
 
     public RegisterBody(String email, String userName, String password) {
         this.email = email;

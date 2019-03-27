@@ -161,4 +161,52 @@ public class Player {
     public String getRightSidekick() {
         return rightSidekick;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setRegistrationDate(String registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    public void setLastLogIn(String lastLogIn) {
+        this.lastLogIn = lastLogIn;
+    }
+
+    public void setCharacterType(String characterType) {
+        this.characterType = characterType;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public void setExperience(Integer experience) {
+        this.experience = experience;
+    }
+
+    public void setGold(Integer gold) {
+        this.gold = gold;
+    }
+
+    public void setBaseHealth(Integer baseHealth) {
+        this.baseHealth = baseHealth;
+    }
+
+    public void setDamage(Integer damage) {
+        this.damage = damage;
+    }
+
+    public void setAttackSpeed(Integer attackSpeed) {
+        this.attackSpeed = attackSpeed;
+    }
+
+    public void setLeftSidekick(String leftSidekick) {
+        this.leftSidekick = leftSidekick;
+    }
+
+    public void setRightSidekick(String rightSidekick) {
+        this.rightSidekick = rightSidekick;
+    }
 }

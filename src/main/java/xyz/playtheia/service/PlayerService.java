@@ -73,4 +73,16 @@ public class PlayerService {
         System.out.println("[TryLogIn] " + player);
         return null;
     }
+
+    public void purchaseSidekick(Long id, int gold, String sidekick, String side) throws Exception {
+        Player player = this.getOnePlayerById(id);
+        player.setGold(player.getGold() + gold);
+        if(side.equals("left")){
+            player.setLeftSidekick(sidekick);
+        } else if (side.equals("right")){
+            player.setRightSidekick(sidekick);
+        }
+        this.playerRepository.save(player);
+        System.out.println("Save done");
+    }
 }

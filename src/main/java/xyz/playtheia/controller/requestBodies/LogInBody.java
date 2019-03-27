@@ -2,8 +2,8 @@ package xyz.playtheia.controller.requestBodies;
 
 public class LogInBody {
 
-    String email;
-    String password;
+    private String email;
+    private String password;
 
     public LogInBody(String email, String password) {
         this.email = email;

@@ -2,10 +2,8 @@ package xyz.playtheia.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import xyz.playtheia.controller.requestBodies.RegisterBody;
 import xyz.playtheia.model.Player;
 import xyz.playtheia.service.PlayerService;
 
@@ -23,16 +21,20 @@ public class RegistrationController {
 
 
     @PostMapping("/registration")
-    public String sendRegistration(@RequestParam String email, String userName, String password) {
+    @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+    public boolean sendRegistration(@RequestBody RegisterBody registerBody) {
+        String email = registerBody.getEmail();
+        String password = registerBody.getPassword();
+        String userName = registerBody.getUserName();
 
         if (playerService.checkForExistingEmail(email)){
-            return "Email: " + email + " already exists";
+            return false;
         } else if (playerService.checkForExistingUserName(userName)){
-            return "User name: " + userName + "already exists";
+            return false;
         }
         System.out.println(email + " " + userName + " " + password);
         playerService.createPlayer(email, userName, password);
-        return userName + " was successfully registered";
+        return true;
     }
 
 }

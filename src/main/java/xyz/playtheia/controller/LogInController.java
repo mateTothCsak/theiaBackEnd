@@ -22,7 +22,8 @@ public class LogInController {
     @PostMapping("/login")
     @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
     public Player LogIn(@RequestBody LogInBody logInBody) {
-        return playerService.tryLogIn(logInBody.getEmail(), logInBody.getPassword());
+        Player result =  playerService.tryLogIn(logInBody.getEmail(), logInBody.getPassword());
+        return result;
     }
 
 

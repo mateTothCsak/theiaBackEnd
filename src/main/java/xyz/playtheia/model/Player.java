@@ -23,6 +23,16 @@ public class Player {
     private String userName;
     private String registrationDate;
     private String lastLogIn;
+    private String characterType;
+    private Integer level;
+    private Integer experience;
+    private Integer gold;
+    private Integer baseHealth;
+    private Integer damage;
+    private Integer attackSpeed;
+    private String leftSidekick;
+    private String rightSidekick;
+
 
 
     private String salt;
@@ -36,6 +46,15 @@ public class Player {
         Date date = new Date();
         this.registrationDate = new Timestamp(date.getTime()).toString();
         this.lastLogIn = new Timestamp(date.getTime()).toString();
+        this.characterType = "Maverick";
+        this.level = 1;
+        this.experience = 0;
+        this.gold = 0;
+        this.baseHealth = 50;
+        this.damage = 200;
+        this.attackSpeed = 70;
+        this.leftSidekick = "";
+        this.rightSidekick = "";
     }
 
     public Player() {}
@@ -97,5 +116,49 @@ public class Player {
         byte[] salt = new byte[16];
         Globals.getRANDOM().nextBytes(salt);
         return salt.toString();
+    }
+
+    public Integer getExperience() {
+        return experience;
+    }
+
+    public String getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public String getLastLogIn() {
+        return lastLogIn;
+    }
+
+    public String getCharacterType() {
+        return characterType;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public Integer getGold() {
+        return gold;
+    }
+
+    public Integer getBaseHealth() {
+        return baseHealth;
+    }
+
+    public Integer getDamage() {
+        return damage;
+    }
+
+    public Integer getAttackSpeed() {
+        return attackSpeed;
+    }
+
+    public String getLeftSidekick() {
+        return leftSidekick;
+    }
+
+    public String getRightSidekick() {
+        return rightSidekick;
     }
 }

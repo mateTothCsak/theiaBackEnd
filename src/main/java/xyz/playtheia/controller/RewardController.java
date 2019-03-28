@@ -6,36 +6,23 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 import xyz.playtheia.controller.requestBodies.EndGameIncome;
 import xyz.playtheia.controller.requestBodies.LogInBody;
-import xyz.playtheia.controller.requestBodies.PurchaseBody;
 import xyz.playtheia.model.Player;
 import xyz.playtheia.service.PlayerService;
 
 
 @RestController
-public class GameController {
-
+public class RewardController {
 
     private PlayerService playerService;
 
     @Autowired
-    public GameController(PlayerService playerService) {
+    public RewardController(PlayerService playerService) {
         this.playerService = playerService;
     }
 
-    @PostMapping("/startGame")
+    @PostMapping("/collectRewards") //from backend to frontend
     @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
-    public void startGame(@RequestBody Long id) {
-        playerService.updateLastGameStarted(id);
+    public Player collectRewards(@RequestBody Long id) {
+        return playerService.getOnePlayerById(id);
     }
-
-    @PostMapping("/currentPlayer")
-    @CrossOrigin(origins = "http://localhost", allowCredentials = "true")
-    public Player currentPlayer() {
-        System.out.println("Got requestyyyy");
-        return playerService.findLatestPlayer();
-    }
-
-
-
-
 }

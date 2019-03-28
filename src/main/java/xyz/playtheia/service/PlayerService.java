@@ -105,11 +105,11 @@ public class PlayerService {
         return lastPlayer;
     }
 
-    /*
+
     public void updatePlayerWealth(Long id, Integer experience, Integer gold){
         Player player = this.getOnePlayerById(id);
         player.setExperience(player.getExperience() + experience);
         player.setGold(player.getGold() + gold);;
         this.playerRepository.save(player);
-    }*/
+    }
 }

@@ -23,7 +23,7 @@ public class CraftController {
 
     @PostMapping("/craft")
     @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
-    public void LogIn(@RequestBody PurchaseBody purchaseBody) throws Exception {
+    public void craft(@RequestBody PurchaseBody purchaseBody) throws Exception {
         Long id = purchaseBody.getId();
         Integer gold = purchaseBody.getGold();
         String sidekick = purchaseBody.getSidekick();

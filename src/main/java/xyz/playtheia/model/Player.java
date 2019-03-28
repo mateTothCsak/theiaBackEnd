@@ -21,8 +21,10 @@ public class Player {
     private String password;
     @Column(unique = true)
     private String userName;
-    private String registrationDate;
-    private String lastLogIn;
+    private Long registrationDate;
+    private Long lastLogIn;
+    private Long lastGameStarted;
+
     private String characterType;
     private Integer level;
     private Integer experience;
@@ -44,8 +46,9 @@ public class Player {
         this.password = generateHash(password, salt);
         this.userName = name;
         Date date = new Date();
-        this.registrationDate = new Timestamp(date.getTime()).toString();
-        this.lastLogIn = new Timestamp(date.getTime()).toString();
+        this.registrationDate = date.getTime();
+        this.lastLogIn = date.getTime();
+        this.lastGameStarted = date.getTime();
         this.characterType = "Maverick";
         this.level = 1;
         this.experience = 0;
@@ -118,17 +121,12 @@ public class Player {
         return salt.toString();
     }
 
+
+
     public Integer getExperience() {
         return experience;
     }
 
-    public String getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public String getLastLogIn() {
-        return lastLogIn;
-    }
 
     public String getCharacterType() {
         return characterType;
@@ -166,13 +164,6 @@ public class Player {
         this.id = id;
     }
 
-    public void setRegistrationDate(String registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-
-    public void setLastLogIn(String lastLogIn) {
-        this.lastLogIn = lastLogIn;
-    }
 
     public void setCharacterType(String characterType) {
         this.characterType = characterType;
@@ -208,5 +199,30 @@ public class Player {
 
     public void setRightSidekick(String rightSidekick) {
         this.rightSidekick = rightSidekick;
+    }
+
+
+    public Long getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Long registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    public Long getLastLogIn() {
+        return lastLogIn;
+    }
+
+    public void setLastLogIn(Long lastLogIn) {
+        this.lastLogIn = lastLogIn;
+    }
+
+    public Long getLastGameStarted() {
+        return lastGameStarted;
+    }
+
+    public void setLastGameStarted(Long lastGameStarted) {
+        this.lastGameStarted = lastGameStarted;
     }
 }

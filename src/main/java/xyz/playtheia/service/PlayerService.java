@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import xyz.playtheia.model.Player;
 import xyz.playtheia.repository.PlayerRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,4 +86,30 @@ public class PlayerService {
         this.playerRepository.save(player);
         System.out.println("Save done");
     }
+
+    public void updateLastGameStarted(Long id){
+        Date date = new Date();
+        Player player = this.getOnePlayerById(id);
+        player.setLastGameStarted(date.getTime());
+        this.playerRepository.save(player);
+    }
+
+    public Player findLatestPlayer() {
+        List<Player> allPlayers = this.getAllPlayers();
+        Player lastPlayer = null;
+        for (Player player : allPlayers){
+            if(lastPlayer == null || player.getLastGameStarted() > lastPlayer.getLastGameStarted()){
+                lastPlayer = player;
+            }
+        }
+        return lastPlayer;
+    }
+
+    /*
+    public void updatePlayerWealth(Long id, Integer experience, Integer gold){
+        Player player = this.getOnePlayerById(id);
+        player.setExperience(player.getExperience() + experience);
+        player.setGold(player.getGold() + gold);;
+        this.playerRepository.save(player);
+    }*/
 }

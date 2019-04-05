@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import xyz.playtheia.model.Player;
 import xyz.playtheia.repository.PlayerRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,12 +52,12 @@ public class PlayerService {
         add(player);
     }
 
-    public boolean checkForExistingEmail(Player player){
-        return this.playerRepository.findPlayerByEmail(player.getEmail()) != null;
+    public boolean checkForExistingEmail(String email){
+        return this.playerRepository.findPlayerByEmail(email) != null;
     }
 
-    public boolean checkForExistingName(Player player){
-        return this.playerRepository.findPlayerByUserName(player.getUserName()) != null;
+    public boolean checkForExistingUserName(String userName){
+        return this.playerRepository.findPlayerByUserName(userName) != null;
     }
 
 
@@ -72,5 +73,43 @@ public class PlayerService {
         }
         System.out.println("[TryLogIn] " + player);
         return null;
+    }
+
+    public void purchaseSidekick(Long id, int gold, String sidekick, String side) throws Exception {
+        Player player = this.getOnePlayerById(id);
+        player.setGold(player.getGold() + gold);
+        if(side.equals("left")){
+            player.setLeftSidekick(sidekick);
+        } else if (side.equals("right")){
+            player.setRightSidekick(sidekick);
+        }
+        this.playerRepository.save(player);
+        System.out.println("Save done");
+    }
+
+    public void updateLastGameStarted(Long id){
+        Date date = new Date();
+        Player player = this.getOnePlayerById(id);
+        player.setLastGameStarted(date.getTime());
+        this.playerRepository.save(player);
+    }
+
+    public Player findLatestPlayer() {
+        List<Player> allPlayers = this.getAllPlayers();
+        Player lastPlayer = null;
+        for (Player player : allPlayers){
+            if(lastPlayer == null || player.getLastGameStarted() > lastPlayer.getLastGameStarted()){
+                lastPlayer = player;
+            }
+        }
+        return lastPlayer;
+    }
+
+
+    public void updatePlayerWealth(Long id, Integer experience, Integer gold){
+        Player player = this.getOnePlayerById(id);
+        player.setExperience(player.getExperience() + experience);
+        player.setGold(player.getGold() + gold);;
+        this.playerRepository.save(player);
     }
 }

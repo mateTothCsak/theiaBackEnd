@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table
@@ -20,8 +21,20 @@ public class Player {
     private String password;
     @Column(unique = true)
     private String userName;
-    private Timestamp registrationDate;
-    private Timestamp lastLogIn;
+    private Long registrationDate;
+    private Long lastLogIn;
+    private Long lastGameStarted;
+
+    private String characterType;
+    private Integer level;
+    private Integer experience;
+    private Integer gold;
+    private Integer baseHealth;
+    private Integer damage;
+    private Integer attackSpeed;
+    private String leftSidekick;
+    private String rightSidekick;
+
 
 
     private String salt;
@@ -32,10 +45,20 @@ public class Player {
         this.salt = generateSalt();
         this.password = generateHash(password, salt);
         this.userName = name;
-        this.registrationDate = new Timestamp(System.currentTimeMillis());
-        this.lastLogIn = new Timestamp(System.currentTimeMillis());
+        Date date = new Date();
+        this.registrationDate = date.getTime();
+        this.lastLogIn = date.getTime();
+        this.lastGameStarted = date.getTime();
+        this.characterType = "Maverick";
+        this.level = 1;
+        this.experience = 0;
+        this.gold = 0;
+        this.baseHealth = 50;
+        this.damage = 200;
+        this.attackSpeed = 70;
+        this.leftSidekick = "";
+        this.rightSidekick = "";
     }
-
 
     public Player() {}
 
@@ -73,7 +96,7 @@ public class Player {
         this.userName = userName;
     }
 
-    public String generateHash(String passwordToHash, String   salt){
+    public String generateHash(String passwordToHash, String salt){
         String generatedPassword = null;
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
@@ -96,5 +119,110 @@ public class Player {
         byte[] salt = new byte[16];
         Globals.getRANDOM().nextBytes(salt);
         return salt.toString();
+    }
+
+
+
+    public Integer getExperience() {
+        return experience;
+    }
+
+
+    public String getCharacterType() {
+        return characterType;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public Integer getGold() {
+        return gold;
+    }
+
+    public Integer getBaseHealth() {
+        return baseHealth;
+    }
+
+    public Integer getDamage() {
+        return damage;
+    }
+
+    public Integer getAttackSpeed() {
+        return attackSpeed;
+    }
+
+    public String getLeftSidekick() {
+        return leftSidekick;
+    }
+
+    public String getRightSidekick() {
+        return rightSidekick;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+
+    public void setCharacterType(String characterType) {
+        this.characterType = characterType;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public void setExperience(Integer experience) {
+        this.experience = experience;
+    }
+
+    public void setGold(Integer gold) {
+        this.gold = gold;
+    }
+
+    public void setBaseHealth(Integer baseHealth) {
+        this.baseHealth = baseHealth;
+    }
+
+    public void setDamage(Integer damage) {
+        this.damage = damage;
+    }
+
+    public void setAttackSpeed(Integer attackSpeed) {
+        this.attackSpeed = attackSpeed;
+    }
+
+    public void setLeftSidekick(String leftSidekick) {
+        this.leftSidekick = leftSidekick;
+    }
+
+    public void setRightSidekick(String rightSidekick) {
+        this.rightSidekick = rightSidekick;
+    }
+
+
+    public Long getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Long registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    public Long getLastLogIn() {
+        return lastLogIn;
+    }
+
+    public void setLastLogIn(Long lastLogIn) {
+        this.lastLogIn = lastLogIn;
+    }
+
+    public Long getLastGameStarted() {
+        return lastGameStarted;
+    }
+
+    public void setLastGameStarted(Long lastGameStarted) {
+        this.lastGameStarted = lastGameStarted;
     }
 }
